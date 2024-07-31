@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    {% load static %}
+    <link rel="stylesheet" href="static/pp.css">
+</head>
+<body>
+    <div class="p-container">
+    {% include 'navbar.html' %}
+            <div class="profile-card">
+                <h2>{{user.username | capfirst}}</h2>
+                <img src="static/usericon.png" alt="Profile Picture" class="profile-pic">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="file" name="pfp" accept="image/*" style="margin-bottom: 10px;" id="pfp">
+                    <button type="submit" class="pink-button" style="margin-left:0px;width:90%;font-size:90%;padding:4%;height:fit-content;">Upload profile</button><br>
+                </form>
+                <div class="t-box">
+                    <p class="upload-info">Upload a new profile picture. Larger image will be resized automatically.<br>Maximum upload size is 1 MB</p>
+                </div>
+            </div>
+        <div class="edit-container">
+            <div class="edit-profile">
+                <form method="post">
+                    {% csrf_token %}
+                    <h2>Edit Profile</h2>
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" name="fullname">
+                    </div>
+                    <div class="form-group">
+                        <label for="Dateofbirth">Date of Birth</label>
+                        <input type="date" id="date" name="date">
+                    </div><br>
+                    <div class="form-group">
+                        <label for="Contact">Contact no.</label>
+                        <input type="text" id="Contact" name="Contact">
+                    </div>
+                    <div class="form-group">
+                        <label for="Gender">Gender:</label>
+                        Male <input type="radio" id="radio" name="ok" style="width:30px;">
+                        Female <input type="radio" id="radio" name="ok" style="width:30px;">
+                    </div><br>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="demo@mail.com" name="email">
+                    </div>
+                    <div class="form-group social-profile">
+                        <label>Social Profile</label>
+                        <input type="text" placeholder="Linkedin Profile Link" id="pf1" name="pf1">
+                        <input type="text" placeholder="Twitter Profile Link" id="pf2" name="pf2">
+                        <input type="text" placeholder="Other" id="pf3" name="pf3">
+                    </div>
+                    <button type="submit" class="update-btn">Update Info</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

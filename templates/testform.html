@@ -1,0 +1,266 @@
+<!-- quizapp/templates/quizapp/quiz.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static%}
+    <link rel="stylesheet" href="static/testform.css">
+
+    <meta charset="UTF-8">
+    <title>Quiz</title>
+    
+</head>
+<body style="background-color:#F5F6F4;">
+    <div class="testUcontainer">
+        {% include 'navbar.html'%}
+        <div class="test-container">
+            <div class="item  sliding-element" id="Quiz">
+                <p class="p7">Aptitude and skills Assessment Test</p>
+                <p class="p8">Start the assessment by chosing the field below in which you are looking for employement opportunities
+                    or to upskill yourself. The assessment will include 10 questions, 5 questions each from Soft Skills
+                    and Field based Domain.
+                </p>
+                <h3 class="p7" style="font-size:150%;">Choose your field of study</h1>
+            
+                <form id="fieldForm" method="POST"> 
+                    {% csrf_token %}
+                    <label class="p7" style="font-size:2.5vh;margin-left:auto;" for="field_of_study">Field of Study:</label>
+                    <select id="field_of_study" name="field_of_study">
+                        <option value="BCA">Computer Science Engineering (I.T.)</option>
+                        <option value="BTech">Engineering</option>
+                        <option value="non-technical">Humanities and Social Sciences</option>
+                        <option value="Management">Management</option>
+                        <option value="Law">Law</option>
+                    </select>
+                    <button class="pink-button" type="button" onclick="startQuiz()" 
+                    style="cursor:pointer;margin:2%;">Start Quiz</button>
+
+                </form>
+        </div>
+    </div>
+</div>
+
+    <script>
+        var field;
+        var percentage=0;
+        var totalEMarks = 0;
+        var totalFMarks = 0;
+        var totalMarks = 0;
+        var correctE = [];
+        var correctF = [];
+        var selectedE= [];
+        var selectedF = [];
+        var totalEQuestions = 0;
+        var totalFQuestions = 0;
+        var totalQue=1;
+        var percentageInput
+
+        function startQuiz() {
+            var field_of_study = document.getElementById('field_of_study').value;
+            field=field_of_study;
+            fetchQuestions(field_of_study);
+        }
+
+        function fetchQuestions(field_of_study) {
+            fetch('/quiz/questions/' + field_of_study + '/')
+                .then(response => response.json())
+                .then(data => {
+                    EshowQuestions(data.Equestions,);
+                });
+        }
+
+        function EshowQuestions(Equestions) {
+            var QuizDiv = document.getElementById('Quiz');
+            QuizDiv.innerHTML = ''; // Clear previous questions
+
+            totalEQuestions = Equestions.length; // Update totalEQuestions
+            correctE = []; // Reset correctE array
+
+            Equestions.forEach((question, index) => {
+                var questionElement = document.createElement('div');
+                questionElement.classList.add('questyle');
+                questionElement.innerHTML = '<p>' +totalQue+'. ' + question.question_text + '</p>' +
+                    '<label><input type="radio" name="questionE' + index + '" value="1">' + question.options[0] + '</label><br>' +
+                    '<label><input type="radio" name="questionE' + index + '" value="2">' + question.options[1] + '</label><br>' +
+                    '<label><input type="radio" name="questionE' + index + '" value="3">' + question.options[2] + '</label><br>' +
+                    '<label><input type="radio" name="questionE' + index + '" value="4">' + question.options[3] + '</label><br>';
+
+                QuizDiv.appendChild(questionElement);
+                correctE.push(question.correct);
+                totalQue +=1;
+            });
+            var submitButton = document.createElement('button');
+            submitButton.textContent = 'Submit';
+            submitButton.classList.add('pink-button');
+            submitButton.onclick = function() {
+                calculateMarks();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+                startQuiz2();
+            };
+            QuizDiv.appendChild(submitButton);
+            
+        }
+
+        function startQuiz2() {
+            //alert('startQuiz2');
+            fetchQuestions2(field);
+        }
+
+        function fetchQuestions2(field_of_study) {
+            //alert('fetchQuestions2');
+            fetch('/quiz/questions/' + field_of_study + '/')
+                .then(response => response.json())
+                .then(data => {
+                    showQuestions(data.questions);
+                });
+        }
+
+        function showQuestions(questions) {
+            //alert('showQuestions');
+            var QuizDiv = document.getElementById('Quiz');
+            QuizDiv.innerHTML = ''; // Clear previous questions
+
+            totalFQuestions = questions.length; // Update totalFQuestions
+            correctF = []; // Reset correctF array
+
+            questions.forEach((question, index) => {
+                var questionElement = document.createElement('div');
+                questionElement.classList.add('questyle2');
+                questionElement.innerHTML = '<p>' +totalQue+'. '+ question.question_text + '</p>' +
+                    '<label><input type="radio" name="questionF' + index + '" value="1">' + question.options[0] + '</label><br>' +
+                    '<label><input type="radio" name="questionF' + index + '" value="2">' + question.options[1] + '</label><br>' +
+                    '<label><input type="radio" name="questionF' + index + '" value="3">' + question.options[2] + '</label><br>' +
+                    '<label><input type="radio" name="questionF' + index + '" value="4">' + question.options[3] + '</label><br>';
+
+                QuizDiv.appendChild(questionElement);
+                correctF.push(question.correct);
+                totalQue +=1;
+            });
+            
+
+            var nextButton = document.createElement('button');
+            nextButton.textContent = 'Generate Report';
+            nextButton.classList.add('pink-button');
+            nextButton.onclick = function() {
+                calculateMarks();
+                report();
+
+            };
+            QuizDiv.appendChild(nextButton);
+
+        }
+        function calculateMarks() {
+            for (var i = 0; i < totalEQuestions; i++) {
+                var selectedOption = document.querySelector('input[name="questionE' + i + '"]:checked');
+                if (selectedOption) {
+                    var selectedValue = parseInt(selectedOption.value);
+                    if (selectedValue === correctE[i]) {
+                        totalEMarks += 1;
+                    } else {
+                        totalEMarks -= 0.5;
+                    }
+                }
+            }
+
+            for (var i = 0; i < totalFQuestions; i++) {
+                var selectedOption = document.querySelector('input[name="questionF' + i + '"]:checked');
+                if (selectedOption) {
+                    var selectedValue = parseInt(selectedOption.value);
+                    if (selectedValue === correctF[i]) {
+                        totalFMarks += 1;
+                    } else {
+                        totalFMarks -= 0.5;
+                    }
+                }   
+            }
+
+        }
+
+        function report() {
+            totalMarks = totalEMarks + totalFMarks;
+            //totalQue = totalEQuestions + totalFQuestions;
+            percentage = (totalMarks / (totalEQuestions + totalFQuestions)) * 100;
+            senddata(percentage);
+        }
+
+        async function senddata(percentage) {
+                try {
+                    const response = await fetch('/api/my-view/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRFToken': getCookie('csrftoken')
+                        },
+                        body: JSON.stringify({ 
+                            "percentage":percentage,
+                            "totalEMarks":totalEMarks,
+                            "totalFMarks":totalFMarks,
+                            'totalMarks':totalMarks,
+                            'totalQue':totalQue,
+                            'field':field,
+                     })
+                    });
+        
+                    // Check if the response status is OK
+                    if (response.ok) {
+                        // Redirect to the report page if the request was successful
+                        window.location.href = '/report/';
+                    } else {
+                        // Read the response as text first
+                        const errorText = await response.text();
+        
+                        // Try to parse JSON if possible
+                        try {
+                            const errorData = JSON.parse(errorText);
+                            console.error('Error:', errorData);
+                        } catch (jsonError) {
+                            // If parsing fails, log the raw text
+                            console.error('Error:', errorText);
+                        }
+                    }
+                } catch (error) {
+                    console.error('Network error:', error);
+                }
+        }
+
+        // Function to get CSRF token from cookies
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        // Function to get CSRF token from cookies
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        
+
+    
+    </script>
+   </body>
+</html>

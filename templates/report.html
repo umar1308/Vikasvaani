@@ -1,0 +1,120 @@
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'footer.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'report.css' %}">
+    <script src="../static/script.js"></script>
+</head>
+<body>
+    <div class="report-container">
+        <div class="report-navbar">
+            <button id="toggleButton">☰</button>
+            <div id="sidebar" class="sidebar">
+                <button id="toggleButton2">☰</button>
+                <div class="profile">
+                    {%if user.is_authenticated%}
+                    <img src="static/usericon.png" alt="User Profile" class="profile-icon">
+                    <h2>{{user.username | capfirst}}</h2>
+                    <h2><a href="pp.html">View Profile</a></h2>
+
+                    {%else%}
+                    <div class="pink-button" style="position:relative;top:30px;">
+                        <a class="nav-link" id="nfont"href="register.html"class="heffect" style="font-size:12px;width:100px;">Create an account</a>
+                    </div>
+                    {%endif%}
+                </div>
+                <ul class="sidebar-menu">
+                    <li><a href="">Home</a></li>
+                    <li><a href="about.html#services">Services</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="ABOUT.HTML#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="logoContainer">
+                <img src="../static/logo.jpg" class="logo">
+            </div>
+            <div class="navItem">
+                <div><a href="/">VikaasVani</a></div>
+            </div>
+        </div>
+        <div class="items sliding-element">
+            <div class="item1">
+                <p><strong>Personalised Report generated for you, {{user.username | capfirst}}</strong> </p>
+            </div>
+            <div class="item2">
+                <p class="head">
+                    Student Score Card
+                </p>
+                <p class="body">
+                    <span>Total Marks:</span>{{record.totalQue}}<br>
+                    <span>Marks Obtained:</span>{{record.totalMarks}}<br>
+                    <span>Percentage: </span>{{record.percentage}}%<br><br>
+
+                    <span>Marks Scored in English Grammar and Soft Skills: </span>{{record.totalEMarks}}<br>
+                    <span>Marks Scored in Aptitude test and Reasoning: </span>{{record.totalFMarks}}<br><br>
+
+                    {{user.username | capfirst}}<span> You are 
+                    {% if record.percentage >= 70 %} an Advance level Learner. Here are Advance level course best suited according to your field choice {{record.field}}.
+                    {% elif record.percentage >= 35 and record.percentage < 70 %} an Intermediate level Learner. Here are Intermediate level course best suited according to your field choice {{record.field}}.
+                    {% elif record.percentage >= 0 and record.percentage < 35 %} a Beginner level Learner. Here are Beginner level course best suited according to your field choice {{record.field}}.
+                    {% endif %}
+                    <br></span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="container2" style="margin-top:10%;">
+        <center><h2 class="donate">Recommended Field Courses for your Level</h1><br></center>
+        <div id="list-volunteers" style="width:100%;display: flex;gap: 15px;overflow-x:auto;overflow-y: hidden;height: 320px;align-items: center;">
+            {% for i in t %}
+                <div class="grid text-center"  >
+                    <div class="g-col-3 g-col-md-3"  >
+                        <div class="card" style="width: 25rem; background-color: white;box-shadow: 6px 4px 20px grey;border-radius:10px;">
+                            <div class="card-body">
+                                <img src="../{{i.image}}" class="img">
+                                <h5 class="card-title-report">{{i.name}}</h5>
+                                <p class="card-text"> </p>
+                                <a href={{j.link}} class="card-link" ><button class="pink-button">See Course Details</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        {%endfor%}
+        </div>
+    </div>
+    <div class="container2"style="margin-top:10%;">
+        <center><h2 class="donate">Recommended English Courses for your Level</h1><br></center>
+        <div id="list-volunteers" style="width:100%;display: flex;gap: 15px;overflow-x:auto;overflow-y: hidden;height: 320px;align-items: center;">
+            {% for i in e %}
+                <div class="grid text-center"  >
+                    <div class="g-col-3 g-col-md-3"  >
+                        <div class="card" style="width: 25rem; background-color: white;height: 280px;box-shadow: 6px 4px 20px grey;">
+                            <div class="card-body">
+                                <img src="../{{i.image}}" class="img">
+                                <h5 class="card-title-report">{{i.name}}</h5>
+                                <p class="card-text"> </p>
+                                <a href={{j.link}} class="card-link" ><button class="pink-button">See Course Details</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        {%endfor%}
+        </div>
+    </div>
+   {% include 'footer.html' %}
+
+</body>
+
+{% comment %} <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const toggleButton = document.getElementById('toggleButton');
+        const sidebar = document.getElementById('sidebar');
+    
+        toggleButton.addEventListener('click', () => {
+            if (sidebar.style.left === '-250px') {
+                sidebar.style.left = '0';
+            } else {
+                sidebar.style.left = '-250px';
+            }
+        });
+    });
+</script> {% endcomment %}

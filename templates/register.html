@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="static/mystyle2.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <style>
+        body {
+            background-image:url("static/tc2.png");
+            background-image:no-repeat;
+            background-size:auto;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction:column;
+        }
+    </style>
+</head>
+<body>
+    <div class="container8">
+        <div class="container9">
+            <p style="position:relative;left:15%;width:300px;top:2%;">already have an account? 
+                <a href="login.html">Sign in</a>
+            </p>
+        <h2 style="font-size:36px;">Create an account.</h2>
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="input-container">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="input-container">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="input-container">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit" class="pink-button2" style="margin-top:40px;">Sign up</button>
+        </form>
+        <div class="social-login">
+            <p>Or login with:</p>
+            <a href="" class="google-btn"><i class="fab fa-google"></i> Google</a>
+            <a href="" class="facebook-btn"><i class="fab fa-facebook-f"></i> Facebook</a>
+        </div>
+        <div style="position:relative;color:red;width:300px;top:-36%;font-size:14px;">
+            {% for message in messages%}
+            <p>{{message}}</p>
+            {%endfor%}
+        </div>
+    </div>
+    </div>
+</body>
+</html>
+

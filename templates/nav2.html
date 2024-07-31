@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VikaasVani</title>
+    <style>
+        .navbar {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-content:center;
+            align-items: center; 
+            padding: 1rem;
+            width: 300px;
+            height: 70px;
+            z-index:1000;
+            box-sizing: border-box;
+            
+        }
+
+        .logoContainer {
+            flex: 0 0 auto;
+            width: auto;
+            height: auto;
+            padding-left: 0;
+            margin: 0;
+        }
+
+        .logo {
+            height: 50px; 
+            width: auto;
+            margin-left: 15px;
+            padding: 10px;
+        }
+
+        .navItem {
+            flex: 1;
+            margin-right:1%;
+            margin-left: 1%; 
+            font-size: 180%;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .navItem a{
+            color:darkslategrey;
+            text-decoration:none;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logoContainer">
+            <img src="static/logo.jpg" class="logo">
+        </div>
+        <div class="navItem">
+            <div><a href="/">VikaasVani<a></div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+{% comment %} 
+    <div class="navbar-sup">
+        {% include 'navbar.html' %}
+    </div>
+ {% endcomment %}

@@ -1,0 +1,291 @@
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="css" href="static/mystyle.css">
+    <link rel="stylesheet" type="css" href="static/mystyle2.css">
+    <link rel="stylesheet" type="css" href="static/testimonials.css">
+    <link rel="stylesheet" type="css" href="static/testimonials.css">
+
+
+  <script src="https://kit.fontawesome.com/9bb1950ca6.js" crossorigin="anonymous"></script>
+  <script src="static/script.js"></script>
+</heaD>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: flex-center;
+        align-items: center;
+        height: auto;
+        margin: 0;
+        flex-direction:column;
+        flex-wrap:wrap;
+        overflow-y:auto;
+    }
+    
+</style>
+<body>
+    <div class="container">
+        <navbar>
+            {% include 'navbar.html' %}
+        </navbar>
+        <div class="heroSection sliding-element">
+            <div class="Text">
+                <div class="text1">
+                    <p class="hero-text1">Education to all Sections of Society with</p>
+                    <p class="hero-text2">
+                        VikasVaani.org
+                    </p>
+                </div>
+                <div class="text2">
+                    Education <i class="fas fa-circle" style="font-size:20px;color:darkcyan;text-shadow:2px 2px 4px grey;"></i> UpSkill
+                    <i class="fas fa-circle" style="font-size:20px;color:darkcyan;text-shadow:2px 2px 4px grey;"></i> Social Development
+                </div>
+            </div>
+            <div>
+                <img class="heroImage" src="static/5437683.jpg">
+            </div>
+        </div>
+        <div class="container1">
+            <div class="but">
+            <button class="dashed-button" style="z-index:5;"><a href="about.html"> Our Organisation </a></button>
+            </div>
+            <div class="paragraph">
+                VikaasVani aims to bring sustainability in education through the adoption of innovative technology, reducing dependence on physical institutions and including people from diverse economic backgrounds. 
+            </div>
+            <button class="pink-button" style="margin-left:10%;"><a href="about.html#sdg">Know More</a></button>
+        </div>
+        <div class="container3">
+            <p class="p1" style="margin-top:80px;margin:5%;">How we achieve Educational Sustainability?</p>
+            <div class="stair-item1">Take our test<br>
+                <p>
+                    Take your test to assess your current educational level
+                    by series of soft and hard skills questions.
+                </p>
+                <button class="pink-button" style="border:none;background-color:#76BD00;"><a href="testform.html"> Start Test</a></button>
+            </div>
+            <div class="stair-item2">Analyse Reports<br>
+                <p>
+                    Analyse the test results and generate personal course recommendations.
+                </p>
+            </div>
+            <div class="stair-item3" style="margin-left:20%;">Access other resources<br> 
+                <p>
+                Explore Government scholarships, webinars, community actions, NGOs and other opportunities in Education sector.
+                </p>
+                <button class="pink-button" style="border:none;background-color:#76BD00;"><a href="explore.html"> Explore</a></button>
+            </div>
+        </div>
+
+        <div class="container4" style="margin-top:50px;">
+            <p class="p1" style="color:white;">
+                <i class="fas fa-user-graduate" style="font-size:50px;color:lightgreen;text-shadow:2px 2px 4px grey;"></i>
+                Our Best performers</p>
+            <p class="p2" style="
+                margin-left: 6%;">On the basis of recommended examinations score.</p>
+        </div>
+        <div class="container5">
+            <div class="box">
+                <img class="c5" src="static/stu1.png">
+                <p class="p3">ACE 1<i class="fas fa-crown" style="font-size:20px;color:yellow;text-shadow:2px 2px 4px grey;"></i></p>
+                <p class="p5">Best performer in Technical Field<p>
+            </div>
+            <div class="box">
+                <img class="c5" src="static/stu2.png">
+                <p class="p3">ACE 2 <i class="fas fa-crown" style="font-size:20px;color:lightblue;text-shadow:2px 2px 4px grey;"></i></p>
+                <p class="p5">Best performer in Technical Field<p>
+            </div>
+            <div class="box">
+                <img class="c5" src="static/stu3.png">
+                <p class="p3">ACE 3<i class="fas fa-crown" style="font-size:20px;color:lightblue;text-shadow:2px 2px 4px grey;"></i></p>
+                <p class="p5">Best performer in Technical Field<p>
+            </div>
+        </div>
+
+        <div class="container6">
+            <p class="p4" style="width:100%;">Are you an NGO?</p>
+            <p class="p2" style="padding:1%;color:grey;letter-spacing:0.5vh;width:100%;"> 
+                We are looking for NGOs to promote education in young students
+            </p>
+            <div class="but">
+                <button class="round-button" style="z-index:5;margin:1%;"><a href="ngoenroll.html"> Enroll your students today. </a></button>
+            </div>
+        </div>
+        <div class="container6" STYLE="HEIGHT:AUTO;">
+            <p class="p4" style="width:100%;">Active Seminars and Summits</p>
+            <p class="p5" style="width:100%;">By government and other Organisation for education, trending skills and job awareness in youth. </p>
+            {% include 'card.html' %}
+        </div>
+        <style>
+            *{
+                font-family:'Trebuchet MS';
+            }
+            
+            .carousel-container {
+                position: relative;
+                width: 80%;
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+            
+            .carousel {
+                display: flex;
+                overflow: hidden;
+                background-color: white;
+                border-radius: 15px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+            
+            .carousel-item {
+                flex: 1 0 100%;
+                transition: transform 0.5s ease-in-out;
+            }
+            
+            .c-card {
+                padding: 40px;
+                text-align: center;
+            }
+            
+            .c-card-title {
+                font-size: 18px;
+                color: #333;
+            }
+            
+            .c-client-name {
+                font-size: 22px;
+                color: darkcyan;
+            }
+            
+            .c-client-description {
+                font-size: 16px;
+                color: #777;
+            }
+            
+            .carousel-controls {
+                position: absolute;
+                top: 50%;
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                transform: translateY(-50%);
+            }
+            
+            .carousel-arrow {
+                background-color: darkcyan;
+                color: white;
+                border: none;
+                padding: 10px;
+                cursor: pointer;
+                font-size: 18px;
+                border-radius: 50%;
+            }
+            
+            .carousel-dots {
+                text-align: center;
+                margin-top: 10px;
+            }
+            
+            .dot {
+                display: inline-block;
+                width: 10px;
+                height: 10px;
+                background-color: darkcyan;
+                border-radius: 50%;
+                margin: 0 5px;
+                cursor: pointer;
+            }
+            
+            .dot.active {
+                background-color: darkslategrey;
+            }
+            
+        </style>
+        <div style="height:auto;margin-top:10%;">
+            <div class="carousel-container">
+                <div class="carousel">
+                    <div class="carousel-item active">
+                        <div class="c-card">
+                            <h2 class="c-card-title">What Client Says</h2>
+                            <h3 class="c-client-name">Client One</h3>
+                            <p class="c-client-description">
+                                ""VikaasVani has been instrumental in enhancing our educational initiatives. The platform provided invaluable resources and upskilling opportunities that significantly benefited our students. The personalized course recommendations and the extensive information on government schemes were incredibly useful. Thanks to VikaasVani, we've seen a marked improvement in student engagement and career readiness."
+                            </p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="c-card">
+                            <h2 class="c-card-title">What Client Says</h2>
+                            <h3 class="c-client-name">Client Two</h3>
+                            <p class="c-client-description">
+                                "Working with VikaasVani has been a transformative experience for our community outreach programs. The platform’s emphasis on social sustainability and volunteer opportunities has greatly empowered our youth. The easy access to educational programs and NGO activities has made a substantial impact on our participants, fostering a sense of purpose and enhancing their skills."
+                            </p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="c-card">
+                            <h2 class="c-card-title">What Client Says</h2>
+                            <h3 class="c-client-name">Client Three</h3>
+                            <p class="c-client-description">
+                                "VikaasVani's comprehensive approach to education and social development is impressive. The project’s integration of government schemes, upskilling courses, and community activities has created a holistic platform for personal and educational growth. Our students have gained access to essential resources and have been inspired to engage in meaningful volunteer work. VikaasVani truly stands out in promoting educational and social sustainability."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="carousel-dots">
+                    <span class="dot active" data-slide="0"></span>
+                    <span class="dot" data-slide="1"></span>
+                    <span class="dot" data-slide="2"></span>
+                </div>
+                <div class="carousel-controls">
+                    <button class="carousel-arrow left-arrow" style="margin-left:-4%;">&lt;</button>
+                    <button class="carousel-arrow right-arrow">&gt;</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% include 'footer.html' %}
+
+</body>
+
+<Script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const carouselItems = document.querySelectorAll('.carousel-item');
+        const dots = document.querySelectorAll('.dot');
+        const leftArrow = document.querySelector('.left-arrow');
+        const rightArrow = document.querySelector('.right-arrow');
+        
+        let currentIndex = 0;
+        
+        function updateCarousel(index) {
+            carouselItems.forEach((item, i) => {
+                item.style.transform = `translateX(-${index * 100}%)`;
+            });
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
+        
+        function showNext() {
+            currentIndex = (currentIndex + 1) % carouselItems.length;
+            updateCarousel(currentIndex);
+        }
+        
+        function showPrevious() {
+            currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
+            updateCarousel(currentIndex);
+        }
+        
+        rightArrow.addEventListener('click', showNext);
+        leftArrow.addEventListener('click', showPrevious);
+        
+        dots.forEach(dot => {
+            dot.addEventListener('click', (e) => {
+                currentIndex = parseInt(e.target.getAttribute('data-slide'));
+                updateCarousel(currentIndex);
+            });
+        });
+    });
+    
+    
+</script>
