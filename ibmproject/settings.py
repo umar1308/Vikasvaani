@@ -25,9 +25,19 @@ SECRET_KEY = 'django-insecure-&7)(h_a27!5ykz4wf@(6b(atl%qom6q#ypd&g7q%5d9(w=l&6m
 # SECURITY WARNING: don't run with debug turned on in production!
 import os
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = 'VikasVaani-main/staticfiles/'
+STATIC_URL = '/static/'
 
+# Define the directory to collect static files to
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Additional locations the staticfiles app will traverse
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
+# Media files settings (if you have user-uploaded files)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 if os.getenv('VERCEL'):
     DEBUG = False
 
@@ -123,7 +133,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS=os.path.join(BASE_DIR,'static')
+STATICFILES_DIRS=os.path.join(BASE_DIR,'staticfiles')
 STATIC_ROOT=os.path.join(BASE_DIR,'staticfiles_build', 'static')
 
 # Default primary key field type
