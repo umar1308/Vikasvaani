@@ -1,24 +1,23 @@
 {
-	"version": 2,
-	"builds": [
-	  {
-		"src": "ibmproject/wsgi.py",
-		"use": "@vercel/python",
-		"config": { "maxLambdaSize": "15mb" }
-	  },
-	  {
-		"src": "manage.py",
-		"use": "@vercel/python"
-	  }
-	],
-	"routes": [
-	  {
-		"src": "/static/(.*)",
-		"dest": "/static/$1"
-	  },
-	  {
-		"src": "/(.*)",
-		"dest": "ibmproject/wsgi.py"
-	  }
-	]
-  }
+  "version": 2,
+  "builds": [
+    {
+      "src": "manage.py",
+      "use": "@vercel/python",
+      "config": {
+        "maxLambdaSize": "15mb",
+        "includeFiles": "staticfiles/**/*"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/static/(.*)",
+      "dest": "/staticfiles/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "manage.py"
+    }
+  ]
+}
