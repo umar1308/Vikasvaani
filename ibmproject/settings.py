@@ -25,8 +25,8 @@ SECRET_KEY = 'django-insecure-&7)(h_a27!5ykz4wf@(6b(atl%qom6q#ypd&g7q%5d9(w=l&6m
 # SECURITY WARNING: don't run with debug turned on in production!
 import os
 
-STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = 'VikasVaani-main/staticfiles/'
 
 if os.getenv('VERCEL'):
     DEBUG = False
